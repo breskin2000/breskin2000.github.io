@@ -1,4 +1,4 @@
-var CurrentScene = 1;
+var CurrentScene = 1, PreviousScene = 1;
 var Scenes = 1;
 var SceneChanged = false;
 
@@ -26,10 +26,16 @@ function OpenScene(scene) {
         else
             document.getElementById("openscene" + scene).style.borderBottomColor = "#007cff";
             
-        document.getElementById("scene" + CurrentScene).style.opacity = "0";
-        document.getElementById("scene" + scene).style.opacity = "1";
+        document.getElementById("scene" + scene).style.display = "block";
+        setTimeout(function() {document.getElementById("scene" + PreviousScene).style.display = "none";}, 1400);
+           
+        setTimeout(function() { 
+            document.getElementById("scene" + CurrentScene).style.opacity = "0";
+            document.getElementById("scene" + scene).style.opacity = "1";
             
-        CurrentScene = scene;
-        SceneChanged = true;
+            PreviousScene = CurrentScene;
+            CurrentScene = scene;
+            SceneChanged = true;
+        }, 100);
     }
 }

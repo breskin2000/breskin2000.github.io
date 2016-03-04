@@ -4,6 +4,8 @@
         <title>Lewatywy</title>
         <meta charset="UTF-8"/>
         <link rel="Stylesheet" type="text/css" href="../css/fonts.css"/>
+        <link rel="Stylesheet" type="text/css" href="../css/corner-logo.css"/>
+        <script type="text/javascript" src="../js/corner-logo.js"></script>
         <style type="text/css">
             html, body {
                 background-color: black;
@@ -22,7 +24,10 @@
         </style>
     </head>
     <body onload="OnLoad();">
-        <div id="logo" style="position: absolute; top: 1vh; left: 2vh; font-family: HollowPoint; font-size: 8vh; color: white; opacity: 0.5; cursor: pointer;" onclick="window.location = '../index.html'">b</div>
+        <div id="corner-logo" onclick="window.location = '../index.html'">
+            <div id="logo_triangle"></div>
+            <div id="logo_text">breskin</div>
+        </div>
         
         <canvas id="canvas" width="960" height="541">Twoja przeglądarka nie obsługuje obiektu canvas. Zaktualizuj przeglądarkę do najnowszej wersji.</canvas>
         
@@ -42,7 +47,7 @@
             
             var Speed = 4, Wynik = 0, Best = 0;
             
-            var Jump = false, Fall = false, APressed = false, BPressed = false;
+            var Jumping = false, Falling = false, APressed = false, BPressed = false;
             
             var Position = new Vector(0, 0);
             var JaPos = new Vector(0, 0), DominikPos = new Vector(0, 0), PatrykPos = new Vector(0, 0), MarcinPos = new Vector(0, 0), LewatywaPos = new Vector(0, 0);
@@ -99,8 +104,8 @@
                         Context.fillStyle = "#fff";
                         Context.fillText("Score: " + Wynik, 850, 20);
                         
-                        if (Jump) {LewatywaPos.y += Speed * 1.35; if (LewatywaPos.y > 120) {Jump = false; Fall = true;}}
-                        if (Fall) {LewatywaPos.y -= Speed * 1.35; if (LewatywaPos.y < 0) {LewatywaPos.y = 0; Fall = false;}}
+                        if (Jumping) {LewatywaPos.y += Speed * 1.35; if (LewatywaPos.y > 120) {Jumping = false; Falling = true;}}
+                        if (Falling) {LewatywaPos.y -= Speed * 1.35; if (LewatywaPos.y < 0) {LewatywaPos.y = 0; Falling = false;}}
                         
                         if (LewatywaPos.y < 55) {
                             if (LewatywaPos.x + 25 > MarcinPos.x && LewatywaPos.x + 50 < MarcinPos.x + 50) {GameState = "lost";}
@@ -135,7 +140,7 @@
             }
             
             function LewatywaJump() {
-                if (!Jump && !Fall) Jump = true;
+                if (!Jumping && !Falling) Jumping = true;
             }
             
             function KeyDown(e) {

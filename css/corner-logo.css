@@ -1,0 +1,84 @@
+html, body {
+    background-color: black;
+}
+
+#corner-logo {
+    width: 6vh;
+    height: 10vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+#logo_triangle {
+    width: 0px;
+	height: 0px;
+	border-top: 18vh solid #007cff;
+	border-right: 50vh solid transparent;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 9998;
+    transform-origin: 0px 0px;
+    transform: rotate(-90deg);
+    animation-duration: 0.75s;
+    -webkit-animation-duration: 0.75s;
+}
+
+#logo_text {
+    font-family: HollowPoint;
+    text-align: left;
+    font-size: 8vh;
+    color: white;
+    position: absolute;
+    top: 1vh;
+    left: 2vh;
+    opacity: 0.5;
+    z-index: 9999;
+    width: 4vh;
+    overflow: hidden;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+}
+
+@keyframes logo_triangle_show {
+    from {transform: rotate(-90deg);}
+    to {transform: rotate(0deg);}
+}
+
+@keyframes logo_triangle_hide {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(-90deg);}
+}
+
+@keyframes logo_text_show {
+    from {width: 4vh; opacity: 0.5;}
+    to {width: 30vh; opacity: 1;}
+}
+
+@keyframes logo_text_hide {
+    from {width: 30vh; opacity: 1;}
+    to {width: 4vh; opacity: 0.5;}
+}
+
+@-webkit-keyframes logo_triangle_show {
+    from {transform: rotate(-90deg);}
+    to {transform: rotate(0deg);}
+}
+
+@-webkit-keyframes logo_triangle_hide {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(-90deg);}
+}
+
+@-webkit-keyframes logo_text_show {
+    from {width: 4vh; opacity: 0.5;}
+    to {width: 30vh; opacity: 1;}
+}
+
+@-webkit-keyframes logo_text_hide {
+    from {width: 30vh; opacity: 1;}
+    to {width: 4vh; opacity: 0.5;}
+}
