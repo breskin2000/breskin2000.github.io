@@ -3,6 +3,7 @@
     <head>
         <title>Lewatywy</title>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
         <link rel="Stylesheet" type="text/css" href="../css/fonts.css"/>
         <link rel="Stylesheet" type="text/css" href="../css/corner-logo.css"/>
         <script type="text/javascript" src="../js/corner-logo.js"></script>
@@ -25,46 +26,50 @@
         </style>
     </head>
     <body onload="OnLoad();">
-        <div id="corner-logo" onclick="window.location = '../index.html'">
-            <div id="logo_triangle"></div>
-            <div id="logo_text">breskin</div>
-        </div>
-        
-        <canvas id="canvas" width="960" height="541">Twoja przeglądarka nie obsługuje obiektu canvas. Zaktualizuj przeglądarkę do najnowszej wersji.</canvas>
+        <canvas id="canvas" width="960" height="541" oncontextmenu="return false;">Twoja przeglądarka nie obsługuje obiektu canvas. Zaktualizuj przeglądarkę do najnowszej wersji.</canvas>
         
         <img src="grafika/dominik.png" id="dominik" class="hidden" />
         <img src="grafika/ja.png" id="ja" class="hidden" />
         <img src="grafika/marcin.png" id="marcin" class="hidden" />
         <img src="grafika/patryk.png" id="patryk" class="hidden" />
+        <img src="grafika/gronio.png" id="gronio" class="hidden" />
         <img src="grafika/lewatywa.png" id="lewatywa" class="hidden" />
         <img src="grafika/turniej.png" id="turniej" class="hidden" />
         
         <script type="text/javascript">
-            var Ja, Dominik, Marcin, Patryk, Lewatywa, Turniej;
+            var Ja, Dominik, Marcin, Patryk, Gronio, Lewatywa, Turniej;
+            
+            var TouchScreen = false;
             
             var Canvas = document.getElementById("canvas"), Context = Canvas.getContext("2d");
             
             var GameState = "before-start";
             
-            var Speed = 4, Wynik = 0, Best = 0;
+            var Speed = 3, Wynik = 0, Best = 0;
             
-            var Jumping = false, Falling = false, APressed = false, BPressed = false;
+            var Jumping = false, Falling = false, APressed = false, BPressed = false, Touched = false;
             
             var Position = new Vector(0, 0);
-            var JaPos = new Vector(0, 0), DominikPos = new Vector(0, 0), PatrykPos = new Vector(0, 0), MarcinPos = new Vector(0, 0), LewatywaPos = new Vector(0, 0);
+            var JaPos = new Vector(0, 0), DominikPos = new Vector(0, 0), PatrykPos = new Vector(0, 0), GronioPos = new Vector(0, 0), MarcinPos = new Vector(0, 0), LewatywaPos = new Vector(0, 0);
             
             function OnLoad() {
                 Ja = document.getElementById("ja");
                 Dominik = document.getElementById("dominik");
                 Marcin = document.getElementById("marcin");
                 Patryk = document.getElementById("patryk");
+                Gronio = document.getElementById("gronio");
                 Lewatywa = document.getElementById("lewatywa");
                 Turniej = document.getElementById("turniej");
                 
                 document.addEventListener("keydown", KeyDown, false);
                 document.addEventListener("keyup", KeyUp, false);
                 
-                setInterval(function() {Update();}, 20)
+                Canvas.addEventListener("touchstart", TouchStart, false);
+                Canvas.addEventListener("touchend", TouchEnd, false);
+                
+                if ('ontouchstart' in window || navigator.maxTouchPoints) TouchScreen = true;
+                
+                setInterval(function() {Update();}, 15)
             }
             
             function Update() {
@@ -76,7 +81,7 @@
                         Context.fillRect(0, 0, 960, 540);
                         
                         Context.fillStyle = "#fff";
-                        Context.fillText("Press SPACE to start game", 350, 250);
+                        Context.fillText("Press SPACE or TAP screen to start game", 300, 250);
                     break;
                     
                     case "game":
@@ -89,18 +94,22 @@
                         if (PatrykPos.x - Position.x < 180) { PatrykPos.x = Math.random() * 540 + 1000 + Position.x; Wynik++; }
                         if (MarcinPos.x - Position.x < 180) { MarcinPos.x = Math.random() * 540 + 1000 + Position.x; Wynik++; }
                         if (DominikPos.x - Position.x < 180) { DominikPos.x = Math.random() * 540 + 1000 + Position.x; Wynik++; }
+                        if (GronioPos.x - Position.x < 180) { GronioPos.x = Math.random() * 540 + 1000 + Position.x; Wynik++; }
                         
                         Context.drawImage(Turniej, 2, 190, 180, 100);
                         Context.drawImage(Lewatywa, LewatywaPos.x - Position.x, 215 - LewatywaPos.y, 50, 57);
                         Context.drawImage(Marcin, MarcinPos.x - Position.x, 215, 50, 57);
                         Context.drawImage(Patryk, PatrykPos.x - Position.x, 215, 48, 57);
+                        Context.drawImage(Gronio, GronioPos.x - Position.x, 213, 50, 60);
                         Context.drawImage(Dominik, DominikPos.x - Position.x, 215, 48, 57);
-                        Context.drawImage(Ja, JaPos.x - Position.x, 215, 42, 57);
+                        Context.drawImage(Ja, JaPos.x - Position.x, 215, 40, 55);
                         
                         Position.x += Speed;
                         
-                        if (APressed) {LewatywaPos.x -= Speed / 2.25;}
-                        if (BPressed) {LewatywaPos.x += Speed * 1.75;}
+                        if (APressed) {LewatywaPos.x -= Speed / 1.5;}
+                        if (BPressed || Touched) {LewatywaPos.x += Speed * 1.75;}
+                        
+                        LewatywaPos.x -= Speed / 5;
                         
                         Context.fillStyle = "#fff";
                         Context.fillText("Score: " + Wynik, 850, 20);
@@ -108,11 +117,14 @@
                         if (Jumping) {LewatywaPos.y += Speed * 1.35; if (LewatywaPos.y > 120) {Jumping = false; Falling = true;}}
                         if (Falling) {LewatywaPos.y -= Speed * 1.35; if (LewatywaPos.y < 0) {LewatywaPos.y = 0; Falling = false;}}
                         
-                        if (LewatywaPos.y < 55) {
-                            if (LewatywaPos.x + 25 > MarcinPos.x && LewatywaPos.x + 50 < MarcinPos.x + 50) {GameState = "lost";}
-                            if (LewatywaPos.x + 25 > PatrykPos.x && LewatywaPos.x + 50 < PatrykPos.x + 48) {GameState = "lost";}
-                            if (LewatywaPos.x + 25 > DominikPos.x && LewatywaPos.x + 50 < DominikPos.x + 48) {GameState = "lost";}
-                            if (LewatywaPos.x + 25 > JaPos.x && LewatywaPos.x + 50 < JaPos.x + 42) {GameState = "lost";}
+                        var Offset = 25; if (TouchScreen) Offset = 30;
+                        
+                        if ((!TouchScreen && LewatywaPos.y < 55) || (TouchScreen && LewatywaPos.y < 35)) {
+                            if (LewatywaPos.x + Offset > MarcinPos.x && LewatywaPos.x + Offset * 2 < MarcinPos.x + 50) {GameState = "lost";}
+                            if (LewatywaPos.x + Offset > PatrykPos.x && LewatywaPos.x + Offset * 2 < PatrykPos.x + 48) {GameState = "lost";}
+                            if (LewatywaPos.x + Offset > GronioPos.x && LewatywaPos.x + Offset * 2 < GronioPos.x + 48) {GameState = "lost";}
+                            if (LewatywaPos.x + Offset > DominikPos.x && LewatywaPos.x + Offset * 2 < DominikPos.x + 48) {GameState = "lost";}
+                            if (LewatywaPos.x + Offset > JaPos.x && LewatywaPos.x + Offset * 2 < JaPos.x + 42) {GameState = "lost";}
                         }
                         
                         if (LewatywaPos.x - Position.x < 180) {GameState = "lost";}
@@ -130,7 +142,7 @@
                         Context.fillText("You Lost", 450, 200);
                         Context.fillText("Best score: " + Best, 430, 250);
                         Context.fillText("Your score: " + Wynik, 430, 300);
-                        Context.fillText("Press SPACE to play again", 370, 350);
+                        Context.fillText("Press SPACE or TAP screen to play again", 320, 350);
                     break;
                     
                     default:
@@ -165,6 +177,33 @@
                 }
             }
             
+            function OnContextMenu() {return false;}
+            
+            function TouchStart(e) {
+                switch(GameState) {
+                    case "game":
+                        if (Touched) LewatywaJump();
+                        setTimeout(function() {Touched = true;}, 70);
+                    break;  
+                }
+                
+                return false;
+            }
+            
+            function TouchEnd(e) {
+                switch(GameState) {
+                    case "before-start": case "lost":
+                        StartGame();
+                    break; 
+                    
+                    case "game": 
+                        setTimeout(function() {Touched = false;}, 100);
+                    break;
+                }
+                
+                return false;
+            }
+            
             function KeyUp(e) {
                 var Key = "";
                 if (e.which == 32) {Key = "space";}
@@ -181,7 +220,9 @@
                 MarcinPos.x = JaPos.x + 300;
                 PatrykPos.x = JaPos.x + 600;
                 DominikPos.x = JaPos.x + 900;
+                GronioPos.x = JaPos.x + 1100;
                 
+                Touched = false;
                 Wynik = 0;
             }
             

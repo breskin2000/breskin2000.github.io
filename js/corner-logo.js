@@ -1,12 +1,19 @@
+var CornerLogo = document.createElement("div"), LogoTriangle = document.createElement("div"), LogoText = document.createElement("div");
+
 document.addEventListener("DOMContentLoaded", OnLoad, false);
 
-var CornerLogo, LogoTriangle, LogoText;
 var AnimationShowing = false, AnimationClosing = false;
 
 function OnLoad(e) {
-    CornerLogo = document.getElementById("corner-logo");
-    LogoTriangle = document.getElementById("logo_triangle");
-    LogoText = document.getElementById("logo_text");
+    CornerLogo.id = "corner-logo";
+    LogoTriangle.id = "logo_triangle";
+    LogoText.id = "logo_text";
+    
+    LogoText.appendChild(document.createTextNode("breskin"));
+    CornerLogo.appendChild(LogoTriangle);
+    CornerLogo.appendChild(LogoText);
+    
+    document.getElementsByTagName("body")[0].appendChild(CornerLogo);
     
     CornerLogo.addEventListener("mouseover", Logo_MouseOver, false);
     CornerLogo.addEventListener("mouseleave", Logo_MouseOut, false);
