@@ -12,6 +12,7 @@
             html, body {
                 background-color: black;
                 text-align: center;
+                overflow: hidden;
             }
             
             #canvas {
@@ -68,6 +69,11 @@
                 Canvas.addEventListener("touchend", TouchEnd, false);
                 
                 if ('ontouchstart' in window || navigator.maxTouchPoints) TouchScreen = true;
+                
+                if (TouchScreen) {
+                    Canvas.style.height = "92vh";
+                    Canvas.style.marginTop = "2.5vh"
+                }
                 
                 setInterval(function() {Update();}, 15)
             }
@@ -183,7 +189,7 @@
                 switch(GameState) {
                     case "game":
                         if (Touched) LewatywaJump();
-                        setTimeout(function() {Touched = true;}, 70);
+                        setTimeout(function() {Touched = true;}, 100);
                     break;  
                 }
                 
@@ -197,7 +203,7 @@
                     break; 
                     
                     case "game": 
-                        setTimeout(function() {Touched = false;}, 100);
+                        setTimeout(function() {Touched = false;}, 150);
                     break;
                 }
                 
