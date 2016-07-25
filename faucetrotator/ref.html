@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Faucet Rotator</title>
+        <meta charset="UTF-8">
+        <link rel="Stylesheet" type="text/css" href="../css/fonts.css"/>
+        <link rel="Stylesheet" type="text/css" href="../css/corner-logo.css"/>
+        <script type="text/javascript" src="../js/corner-logo.js"></script>
+        <link rel="Shortcut icon" href="../icon.png" />
+
+        <style type="text/css">
+            html, body {
+                background-color: #333;
+            }
+
+            #rotator {
+                width: 50%;
+                height: 100%;
+                background-color: #333;
+                color: white;
+                position: fixed;
+                top: 0px;
+                left: 55%;
+                z-index: 2;
+            }
+
+            #container {
+                text-align: center;
+                background-color: rgba(0, 0, 0, 0.1);
+                width: 30vw;
+                height: 75%;
+                position: absolute;
+                top: 7vh;
+                left: 0vw;
+            }
+
+            #list {
+                width: 35vw;
+                position: absolute;
+                top: 20px;
+                left: 15vh;
+                z-index: 1;
+            }
+
+            .list-element {
+                width: 100%;
+                background-color: #292929;
+                color: white;
+                font-family: Verdana;
+                padding: 1.5vh;
+                transition: 0.5s all;
+                -webkit-transition: 0.5s all;
+                -o-transition: 0.5s all;
+                -moz-transition: 0.5s all;
+                cursor: pointer;
+            }
+
+            .list-element:hover {
+                background-color: #202020;
+            }
+
+            .list-url {
+                display: inline-block;
+                width: 29vw;
+                height: 1.2em;
+                overflow: hidden;
+            }
+
+            .list-time {
+                display: inline-block;
+                float: right;
+                margin-right: 1vw;
+            }
+
+            #next-button {
+                width: 10vw;
+                height: 4.3vh;
+                padding-top: 0.7vh;
+                background-color: #FFB300;
+                color: white;
+                text-align: center;
+                font-size: 3vh;
+                position: absolute;
+                left: 50%;
+                bottom: 40vh;
+                margin-top: -2.5vh;
+                margin-left: -5vw;
+                border-radius: 0px 5px 5px 5px;
+                font-family: Verdana;
+                cursor: pointer;
+            }
+
+            #next-button:active {
+                background-color: #DE9B00;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            function Faucet(url, defaulttime) {
+                this.Url = url;
+                this.Time = 0;
+                this.DefaultTime = defaulttime;
+            }
+
+            var FaucetList = [
+                new Faucet("http://www.siizo.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 180),
+                new Faucet("http://www.btcfixer.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 180),
+                new Faucet("http://crypto4free.net/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 300),
+                new Faucet("http://www.fautsy.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 300),
+                new Faucet("http://www.getbitcoin.online/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 300),
+                new Faucet("http://www.fullbitcoins.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 300),
+                new Faucet("https://brfaucet.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 600),
+                new Faucet("http://easybitcoinfaucet.com/?r=a436047803", 600),
+                new Faucet("http://moonbit.co.in/?ref=b3e05c4a016d", 600),
+                new Faucet("http://www.freebitcoinfaucet.co.uk/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 900),
+                new Faucet("http://www.givemefreebitco.in/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 900),
+                new Faucet("http://www.bestfaucet.org/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 900),
+                new Faucet("http://www.freefaucetbitco.in/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 900),
+                new Faucet("http://www.earnfreebitco.in/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 900),
+                new Faucet("http://www.bitcoinfaucetpro.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 900),
+                new Faucet("http://www.play4bitco.in/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 900),
+                new Faucet("http://www.freebitcoins4.me/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 900),
+                new Faucet("http://www.topfaucet.net/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 900),
+                new Faucet("http://www.bitcoinsbitcoins.net/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 900),
+                new Faucet("http://www.satoshimachine.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 1800),
+                new Faucet("http://bitcoways.xyz/faucetbox-faucet/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 1800),
+                new Faucet("http://www.peakfaucet.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 1800),
+                new Faucet("http://www.crystalbit.cz/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 1800),
+                new Faucet("http://biteasy.tk/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 1800),
+                new Faucet("http://bitcoin-free.club/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 2400),
+                new Faucet("http://www.satoshiworld.club/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://freebitco.in/?r=2837767", 3600),
+                new Faucet("http://www.bitcoinfree.space/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.lemonbitcoin.com/faucet/index.php?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://daily.cf/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.btc-free.top/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://elenafaucets.com/freebitcoin01/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("https://winfreebitcoin.net/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.cryptroller.com/faucets/bitcoin/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.btc-earn.top/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.bestfaucetbitco.in/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.earn-btc.top/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.freebitcoinfaucet.club/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://thefreebitcoin.website/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.bestfaucet.pro/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.btcfaucetpro.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.daddybitco.in/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.free-btc.top/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://memefaucet.xyz/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.gimlifaucet.eu/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.slytherinbtc.pw/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://faucet-bitco.in/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://freebitcoinbuilder.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://www.gryffindorbtc.pw/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://faucetbirthday.hol.es/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://btcfarm.pw/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 3600),
+                new Faucet("http://dailycoin.cf/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 4800),
+                new Faucet("http://www.satoshibox.club/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 5400),
+                new Faucet("http://www.cryptroller.com/faucets/black/bitcoin/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 5400),
+                new Faucet("http://dailycoin.ga/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 6000),
+                new Faucet("http://bestbitcoin.info/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 7200),
+                new Faucet("http://blue-faucet.com/faucet.php?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 7200),
+                new Faucet("http://www.satoshireal.xyz/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 7200),
+                new Faucet("http://www.shatobomb.xyz/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 7200),
+                new Faucet("http://www.topfaucet.info/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 7200),
+                new Faucet("http://www.givemefreebitcoins.today/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 7200),
+                new Faucet("http://www.topfaucet.online/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 7200),
+                new Faucet("http://www.bitcoinfaucet.pro/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 7200),
+                new Faucet("http://dailycoin.tk/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 7200),
+                new Faucet("http://www.btcfaucet.xyz/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 7200),
+                new Faucet("http://faucetbit.ml/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 8400),
+                new Faucet("http://kilobit.ml/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 9600),
+                new Faucet("http://bitconsatoshi.xyz/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 10800),
+                new Faucet("http://www.predimania.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 10800),
+                new Faucet("http://megabit.cf/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 21600),
+                new Faucet("http://getbitcoin.website/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 21600),
+                new Faucet("http://megabit.ml/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 21600),
+                new Faucet("http://faucet.ml/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 25200),
+                new Faucet("http://ultrabitcoin.xyz/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 28800),
+                new Faucet("http://mysatoshi.ml/bitcoin/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 43200),
+                new Faucet("http://www.boxfaucet.com/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 43200),
+                new Faucet("http://tradingsbtc.info/?r=12vUxZLBYKRKrsBi5kCQw3tSRv4zAyck1j", 43200)
+            ];
+
+            function NextFaucet() {
+                for (i=0; i<FaucetList.length; i++) {
+                    if (FaucetList[i].Time == 0) {
+                        FaucetList[i].Time = FaucetList[i].DefaultTime + 30;
+                        window.open(FaucetList[i].Url, "_blank");
+                        break;
+                    }
+                }
+            }
+
+            function RefreshFaucet() {
+                document.getElementById('faucet-frame').src = FaucetList[Current].Url;
+            }
+
+            window.onfocus = function() {
+                if (document.getElementById("auto-open").checked) {
+                    NextFaucet();
+                }
+            }
+
+            window.onload = function() {
+                for (i=0; i<FaucetList.length; i++) {
+                	faucet = document.createElement("div");
+                    faucet.id = "list-faucet-" + i;
+                    faucet.fnumber = i;
+                    faucet.onclick = function() { window.open(FaucetList[this.fnumber].Url, "_blank"); FaucetList[this.fnumber].Time = FaucetList[this.fnumber].DefaultTime + 30; };
+                    faucet.className = "list-element";
+
+                    namenode = document.createElement("div");
+                    namenode.id = "list-faucet-name-" + i;
+                    namenode.className = "list-url";
+                    namenode.appendChild(document.createTextNode(FaucetList[i].Url.substring(0, FaucetList[i].Url.indexOf("?"))));
+
+                    /*timenode = document.createElement("div");
+                    timenode.id = "list-faucet-time-" + i;
+                    timenode.className = "list-time";
+                    timenode.appendChild(document.createTextNode(FaucetList[i].Time + "s"));*/
+
+                    faucet.appendChild(namenode);
+                    //faucet.appendChild(timenode);
+
+                    document.getElementById("list").appendChild(faucet);
+                }
+
+                setInterval(function() {
+                    for (i=0; i<FaucetList.length; i++) {
+                        if (FaucetList[i].Time != 0) { FaucetList[i].Time -= 1; }
+
+                        //document.getElementById("list-faucet-time-" + i).innerHTML = FaucetList[i].Time + "s";
+                    }
+                 }, 1000);
+            }
+        </script>
+
+        <section id="list">
+
+        </section>
+
+        <section id="rotator">
+            <div id="container">
+                <div id="next-button" onclick="NextFaucet()">Next</div>
+
+                <label><input type="checkbox" id="auto-open" style="margin-top: 5vh;"/>AutoOpen<label>
+            </div>
+        </section>
+    </body>
+</html>
