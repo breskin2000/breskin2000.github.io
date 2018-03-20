@@ -1,0 +1,340 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Quiz</title>
+        <meta charset="utf-8">
+        <link type="text/css" rel="Stylesheet" href="style.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div id="quiz">
+            <section id="q1">
+                <div class="question">
+                    Co oznacza skrót IP?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q1a1" class="answer" onclick="choose(1, 1, 2, 'Pani Danecka nie byłaby zadowolona')">
+                        <span>Information Protocol</span>
+                    </div>
+
+                    <div id="q1a2" class="answer" onclick="choose(1, 2, 2, 'Pani Danecka byłaby dumna')">
+                        <span>Internet Protocol</span>
+                    </div>
+
+                    <div id="q1a3" class="answer" onclick="choose(1, 3, 2, 'Pani Danecka nie byłaby zadowolona')">
+                        <span>Informacja Podstawowa</span>
+                    </div>
+
+                    <div id="q1a4" class="answer" onclick="choose(1, 4, 2, 'Pani Danecka nie byłaby zadowolona')">
+                        <span>Informatyka Przedszkolna</span>
+                    </div>
+                </div>
+
+                <div id="q1comment" class="comment"></div>
+            </section>
+
+            <section id="q2">
+                <div class="question">
+                    Co jest główną częścią procesora?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q2a1" class="answer" onclick="choose(2, 1, 4, 'Ale CPU to procesor...')">
+                        <span>CPU</span>
+                    </div>
+
+                    <div id="q2a2" class="answer" onclick="choose(2, 2, 4, 'Wtf?')">
+                        <span>RAM</span>
+                    </div>
+
+                    <div id="q2a3" class="answer" onclick="choose(2, 3, 4, 'Wtf?')">
+                        <span>GUI</span>
+                    </div>
+
+                    <div id="q2a4" class="answer" onclick="choose(2, 4, 4, 'Kto by się spodziewał?')" style="font-size: 17px;">
+                        <span>Monokryształ krzemu, na który naniesiono techniką fotolitografii szereg warstw półprzewodnikowych, tworzących, w zależności od zastosowania, sieć od kilku tysięcy do kilku miliardów tranzystorów</span>
+                    </div>
+                </div>
+
+                <div id="q2comment" class="comment"></div>
+            </section>
+
+            <section id="q3">
+                <div class="question">
+                   Do czego NIE da się wykorzystać karty graficznej?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q3a1" class="answer" onclick="choose(3, 1, 3, 'Da się, kiedyś się nawet opłacało')">
+                        <span>Kopanie kryptowalut</span>
+                    </div>
+
+                    <div id="q3a2" class="answer" onclick="choose(3, 2, 3, 'Trochę ciężko, ale się da')">
+                        <span>Gotowanie wody</span>
+                    </div>
+
+                    <div id="q3a3" class="answer" onclick="choose(3, 3, 3, 'Karta... w pokera... Łapiesz?')">
+                        <span>Granie w pokera</span>
+                    </div>
+
+                    <div id="q3a4" class="answer" onclick="choose(3, 4, 3, 'U mnie działa')">
+                        <span>Ogrzewanie pokoju</span>
+                    </div>
+                </div>
+
+                <div id="q3comment" class="comment"></div>
+            </section>
+
+            <section id="q4">
+                <div class="question">
+                    Kim jest programista?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q4a1" class="answer" onclick="choose(4, 1, 2, '(Pro)gramy, rozumiesz? Nie? Trudno...')">
+                        <span>Osoba obsługująca wagę w skali (pro)gramy</span>
+                    </div>
+
+                    <div id="q4a2" class="answer" onclick="choose(4, 2, 2, 'To nie błędy! To funkcje')">
+                        <span>Osoba robiąca błędy w aplikacjach</span>
+                    </div>
+
+                    <div id="q4a3" class="answer" onclick="choose(4, 3, 2, 'Gram to waga sześcianu czystej wody o długości boku równej 0.01 metra w temperaturze 4 °C')">
+                        <span>Profesjonalista w używaniu gramów</span>
+                    </div>
+
+                    <div id="q4a4" class="answer" onclick="choose(4, 4, 2, 'Nie. Po prostu nie')">
+                        <span>Osoba której nie chciało się wymyślać czwartej odpowiedzi</span>
+                    </div>
+                </div>
+
+                <div id="q4comment" class="comment"></div>
+            </section>
+
+            <section id="q5">
+                <div class="question">
+                    Któro z poniższych symbolizuje OK?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q5a1" class="answer" onclick="choose(5, 1, 3, 'No chyba ty')">
+                        <span>0360bca6a9fd5111a99aad14376dc8d4</span>
+                    </div>
+
+                    <div id="q5a2" class="answer" onclick="choose(5, 2, 3, 'Nieładnie')">
+                        <span>SkQ=</span>
+                    </div>
+
+                    <div id="q5a3" class="answer" onclick="choose(5, 3, 3, 'OK')">
+                        <span>01001111 01001011</span>
+                    </div>
+
+                    <div id="q5a4" class="answer" onclick="choose(5, 4, 3, 'LUL')">
+                        <span>2289b7f0</span>
+                    </div>
+                </div>
+
+                <div id="q5comment" class="comment"></div>
+            </section>
+
+            <section id="q6">
+                <div class="question">
+                    Która gra jest najbardziej znaną grą MMO ostatnich 15 lat?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q6a1" class="answer" onclick="choose(6, 1, 1, 'To jest dobra odpowiedź!')">
+                        <span>World of Warcraft</span>
+                    </div>
+
+                    <div id="q6a2" class="answer" onclick="choose(6, 2, 1, 'Tym razem nie wyszło')">
+                        <span>World of Tanks</span>
+                    </div>
+
+                    <div id="q6a3" class="answer" onclick="choose(6, 3, 1, 'Tym razem nie wyszło')">
+                        <span>World of Warships</span>
+                    </div>
+
+                    <div id="q6a4" class="answer" onclick="choose(6, 4, 1, 'Tym razem nie wyszło')">
+                        <span>World of Warplanes</span>
+                    </div>
+                </div>
+
+                <div id="q6comment" class="comment"></div>
+            </section>
+
+            <section id="q7">
+                <div class="question">
+                    Czym są sztuczne sieci neuronowe?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q7a1" class="answer" onclick="choose(7, 1, 2, 'Biedne motyle...')">
+                        <span>Siatka do łapania motyli</span>
+                    </div>
+
+                    <div id="q7a2" class="answer" onclick="choose(7, 2, 2, 'Teraz wystarczy czekać na terminatora')">
+                        <span>Podstawowa technika tworzenia sztucznej inteligencji</span>
+                    </div>
+
+                    <div id="q7a3" class="answer" onclick="choose(7, 3, 2, 'Poważnie?')">
+                        <span>Polimerowy materiał używany do ocieplania ubrań zimą</span>
+                    </div>
+
+                    <div id="q7a4" class="answer" onclick="choose(7, 4, 2, 'Idk')">
+                        <span>Pajęczyny z neuronów</span>
+                    </div>
+                </div>
+
+                <div id="q7comment" class="comment"></div>
+            </section>
+
+            <section id="q8">
+                <div class="question">
+                    Do której części internetu zaliczane są twoje maile?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q8a1" class="answer" onclick="choose(8, 1, 2, 'To tak jakby listy leżały na ulicy')">
+                        <span>Surface Web</span>
+                    </div>
+
+                    <div id="q8a2" class="answer" onclick="choose(8, 2, 2, 'To by się zgadzało')">
+                        <span>Deep Web</span>
+                    </div>
+
+                    <div id="q8a3" class="answer" onclick="choose(8, 3, 2, 'No ja nie wiem jakie Ty masz maile.')">
+                        <span>Dark Web</span>
+                    </div>
+
+                    <div id="q8a4" class="answer" onclick="choose(8, 4, 2, 'LAN = Sieć lokalna')">
+                        <span>LAN</span>
+                    </div>
+                </div>
+
+                <div id="q8comment" class="comment"></div>
+            </section>
+
+            <section id="q9">
+                <div class="question">
+                    Na jakie najmniejsze jednostki dzieli się bitcoin?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q9a1" class="answer" onclick="choose(9, 1, 4, 'Powiedzmy że to taki młodszy brat bitcoina')">
+                        <span>Litecoin</span>
+                    </div>
+
+                    <div id="q9a2" class="answer" onclick="choose(9, 2, 4, 'Wow, Such money')">
+                        <span>Dogecoin</span>
+                    </div>
+
+                    <div id="q9a3" class="answer" onclick="choose(9, 3, 4, 'To jest całkiem inna waluta')">
+                        <span>Ethereum</span>
+                    </div>
+
+                    <div id="q9a4" class="answer" onclick="choose(9, 4, 4, 'Warty ok. 0.00029378 zł')">
+                        <span>Satoshi</span>
+                    </div>
+                </div>
+
+                <div id="q9comment" class="comment"></div>
+            </section>
+
+            <section id="q10">
+                <div class="question">
+                    W oparciu o jaką technologię działa komunikacja między urządzeniami inteligentnego domu?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q10a1" class="answer" onclick="choose(10, 1, 1, 'Swoją drogą Wi-Fi = Wireless Fidelity ≈ Bezprzewodowa Wierność')">
+                        <span>Wi-Fi</span>
+                    </div>
+
+                    <div id="q10a2" class="answer" onclick="choose(10, 2, 1, 'Podczerwień')">
+                        <span>IrDA</span>
+                    </div>
+
+                    <div id="q10a3" class="answer" onclick="choose(10, 3, 1, 'Komunikacja bardzo krótkiego zasięgu (kilka cm)')">
+                        <span>NFC</span>
+                    </div>
+
+                    <div id="q10a4" class="answer" onclick="choose(10, 4, 1, 'To od nawigacji...')">
+                        <span>GPS</span>
+                    </div>
+                </div>
+
+                <div id="q10comment" class="comment"></div>
+            </section>
+
+            <section id="q11">
+                <div class="question">
+                    Kim był Steve Jobs?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q11a1" class="answer" onclick="choose(11, 1, 3, 'Był buddystą, nie mnichem')">
+                        <span>Buddyjskim mnichem</span>
+                    </div>
+
+                    <div id="q11a2" class="answer" onclick="choose(11, 2, 3, 'Nicolaus August Otto był twórcą pierwszego działającego')">
+                        <span>Twórcą silnika benzynowego</span>
+                    </div>
+
+                    <div id="q11a3" class="answer" onclick="choose(11, 3, 3, 'Po za nim byli jeszcze Steve Wozniak i Ronald Wayne (ale o tym ostatnim nikt nie pamięta)')">
+                        <span>Jednym z założycieli Apple Computers Inc.</span>
+                    </div>
+
+                    <div id="q11a4" class="answer" onclick="choose(11, 4, 3, 'Nie')">
+                        <span>Projektantem Wielkiego Zderzacza Hadronów</span>
+                    </div>
+                </div>
+
+                <div id="q11comment" class="comment"></div>
+            </section>
+
+            <section id="q12">
+                <div class="question">
+                    PC czy konsole?
+                </div>
+
+                <div class="answer-list">
+                    <div id="q12a1" class="answer" onclick="choose(12, 1, 1, '#PCMasterRace')">
+                        <span>PC</span>
+                    </div>
+
+                    <div id="q12a2" class="answer" onclick="choose(12, 2, 1, '#ConsolePeasant')">
+                        <span>Konsole</span>
+                    </div>
+                </div>
+
+                <div id="q12comment" class="comment"></div>
+            </section>
+
+            <section id="finishf">
+                <div class="result">
+                    <img src="f.png" height="550px" width="auto">
+                    <br>
+                    Klasa F czeka na ciebie
+                </div>
+            </section>
+
+            <section id="finishg">
+                <div class="result">
+                    <img src="g.png" height="550px" width="auto">
+                    <br>
+                    W klasie G jest miejsc wiele
+                </div>
+            </section>
+
+            <section id="finishdziennikarska">
+                <div class="result">
+                    <img src="dziennikarska.png" height="550px" width="auto">
+                    <br>
+                    Zawsze zostaje dziennikarska :/
+                </div>
+            </section>
+        </div>
+    </body>
+</html>

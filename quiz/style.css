@@ -1,0 +1,89 @@
+html, body {
+    background-color: black;
+    overflow: hidden;
+    user-select: none;
+    -ms-user-select: none;
+}
+
+section
+{
+    display: block;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.question {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 26px;
+    color: white;
+    text-align: center;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+}
+
+.result
+{
+    text-align: center;
+    width: 100%;
+    padding-top: 8vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 26px;
+    color: white;
+}
+
+.result img
+{
+    margin-bottom: 20px;
+}
+
+#quiz {
+    width: 1366px;
+    position: absolute;
+    top: 0px;
+    left: -683px;
+    margin-left: 50%;
+}
+
+.answer-list {
+    text-align: center;
+}
+
+.answer {
+    display: inline-block;
+    padding: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    color: white;
+    border-width: 2px;
+    border-color: white;
+    border-style: solid;
+    border-radius: 10px;
+    margin: 20px;
+    cursor: pointer;
+    width: 450px;
+    height: 100px;
+    line-height: 80px;
+    transition: all 0.3s;
+}
+
+.answer:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.answer span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.comment
+{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 35px;
+    color: white;
+    opacity: 0;
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;
+    transition: all 0.5s;
+}
